@@ -1,3 +1,9 @@
+/**************************************************** 
+Program Name: HealthProfileGUI.java 
+Programmer's Name: Jared Sylvia 
+Program Description: Handles GUI interaction 
+***********************************************************/
+
 package healthProfile;
 
 import org.eclipse.swt.widgets.Display;
@@ -219,10 +225,10 @@ public class HealthProfileGUI {
 					currentSelectedMember = members.indexOf(hp);
 				}
 				else if(!error.equals("")) {
-					JOptionPane.showMessageDialog(null, String.format("The following fields cannot be left blank: %s", error)); //display error with string containing all empty fields
+					JOptionPane.showMessageDialog(null, String.format("The following fields cannot be left blank: %s", error), "Missing Fields", JOptionPane.INFORMATION_MESSAGE); //display error with string containing all empty fields
 				}
 				else if (userExists == true) {
-					JOptionPane.showMessageDialog(null, "Member already exists.\nPlease search and update existing record if needed."); // display error if attempting to duplicate member
+					JOptionPane.showMessageDialog(null, "Member already exists.\nPlease search and update existing record if needed.", "Duplicate Member Name", JOptionPane.INFORMATION_MESSAGE); // display error if attempting to duplicate member
 				}
 				
 			
@@ -256,7 +262,7 @@ public class HealthProfileGUI {
 					
 				}
 				if(found == false) {
-					JOptionPane.showMessageDialog(null, "Member not found.");
+					JOptionPane.showMessageDialog(null, "Member not found.", "Member not found.", JOptionPane.ERROR_MESSAGE); // if member not found display error
 				}
 			}
 		
@@ -295,8 +301,8 @@ public class HealthProfileGUI {
 					textBMICat.setText(members.get(currentSelectedMember).getCategory());
 					textMaxHeartRate.setText(String.valueOf(members.get(currentSelectedMember).getMaxHR()));
 				}
-				catch(IndexOutOfBoundsException exception) {
-					JOptionPane.showMessageDialog(null, "Update failed, no member or invalid member currently selected.", "Warning!", JOptionPane.ERROR_MESSAGE);
+				catch(IndexOutOfBoundsException exception) { //catch exception caused by currentSelectedMember int being out of range of list of members
+					JOptionPane.showMessageDialog(null, "Update failed, no member or invalid member currently selected.", "Warning!", JOptionPane.ERROR_MESSAGE); //error message it member not selected
 				}
 			}
 		});
@@ -318,7 +324,7 @@ public class HealthProfileGUI {
 					}
 					clearTextBoxes();
 				}
-				catch(IndexOutOfBoundsException exception) {
+				catch(IndexOutOfBoundsException exception) { //catch exception caused by currentSelectedMember int being out of range of list of members
 					JOptionPane.showMessageDialog(null, "Update failed, no member or invalid member currently selected.", "Warning!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
